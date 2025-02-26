@@ -1,0 +1,15 @@
+{
+  "appId": "com.codevisualizer.app",
+  "productName": "Code Visualizer",
+  "directories": {
+    "output": "release/${version}"
+  },
+  "files": [
+    "dist/**/*",
+    "assets/**/*"
+  ],
+  "win": {
+    "target": "nsis",
+    "icon": "assets/icon.ico"
+  }
+} 
