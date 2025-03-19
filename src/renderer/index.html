@@ -5,12 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Visualization</title>
   <style>
-    body { margin: 0; overflow: hidden; }
-    canvas { width: 100vw; height: 100vh; }
+    :root {
+      --primary: #2196F3;
+      --bg-dark: #1E1E1E;
+      --text-light: #E0E0E0;
+      --border: #424242;
+    }
+    
+    body {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Segoe UI', system-ui;
+    }
+    
+    .editor-area {
+      gap: 20px;
+      margin: 15px 0;
+    }
+    
+    #code-editor {
+      background: #2D2D2D;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: #CCCCCC;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      padding: 15px;
+      resize: none;
+      transition: box-shadow 0.3s;
+    }
+    
+    #code-editor:focus {
+      box-shadow: 0 0 0 2px var(--primary);
+      outline: none;
+    }
+    
+    button {
+      background: var(--primary);
+      border-radius: 8px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      padding: 10px 24px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    
+    button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+    
+    #animation-container {
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    
+    #three-canvas {
+      border-radius: 6px;
+    }
+    #controls {
+      padding: 10px 0;
+    }
+    button {
+      padding: 8px 20px;
+      margin-right: 10px;
+      background: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
+
+  <div class="editor-area" style="order: 2;">
+    <textarea 
+      id="code-editor"
+      placeholder="输入C++代码..."
+      style="height: 300px; width: 100%;"
+    ></textarea>
+    <div style="display: flex; gap: 10px; margin-top: 15px;">
+  <button id="render-btn">渲染代码结构</button>
+  <button id="animation-control">启动动画</button>
+</div>
+  </div>
   <div id="root"></div>
-  <script src="bundle.js"></script>
+  <div id="visualization-container" style="height: 70vh; border: 1px solid var(--border); margin: 20px 0;">
+  <canvas id="three-canvas" style="width: 100%; height: 100%;"></canvas>
+</div>
 </body>
-</html> 
+</html>

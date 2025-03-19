@@ -7,8 +7,8 @@
     "dev": "concurrently \"npm run start:renderer\" \"wait-on http://localhost:3000 && npm run start:main\"",
     "start:main": "webpack --config webpack.main.config.js --watch",
     "start:renderer": "webpack serve --config webpack.renderer.config.js --hot",
-    "build": "electron-builder",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.main.config.js && electron-builder",
+    "test": "jest --testPathPattern=src/parser/Lexer.test.ts",
     "generate:parser": "antlr4ts -visitor -Dlanguage=TypeScript -Xexact-output-dir -no-listener -o src/parser/generated src/parser/CPP14Lexer.g4 src/parser/CPP14Parser.g4"
   },
   "repository": {
@@ -26,15 +26,21 @@
     "antlr4ts": "^0.5.0-alpha.4",
     "antlr4ts-cli": "^0.5.0-alpha.4",
     "antlr4ts-sql": "^1.1.0",
-    "electron": "^28.1.0",
+    "chokidar": "^4.0.3",
+    
     "three": "^0.163.0"
   },
   "devDependencies": {
+    "electron": "^28.1.0",
     "@types/electron": "^1.4.38",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.13.5",
+    "@types/three": "^0.174.0",
     "concurrently": "^9.1.2",
     "electron-builder": "^24.9.1",
     "html-webpack-plugin": "^5.6.3",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.6",
     "ts-loader": "^9.5.2",
     "typescript": "^5.3.3",
     "wait-on": "^8.0.2",

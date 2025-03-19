@@ -6,7 +6,8 @@ module.exports = {
   entry: './src/renderer/index.ts',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist/renderer')
+    path: path.resolve(__dirname, 'dist/renderer'),
+    publicPath: ''
   },
   resolve: {
     extensions: ['.ts', '.js'],
@@ -15,15 +16,7 @@ module.exports = {
       three: path.resolve(__dirname, 'node_modules/three')
     }
   },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, 'dist/renderer'),
-      publicPath: '/'
-    },
-    historyApiFallback: true,
-    hot: true,
-    port: 3000
-  },
+  target: 'electron-renderer',
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -38,5 +31,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/renderer/index.html'
     })
-  ]
-} 
+  ],
+  devServer: {
+    static: {
+      directory: path.join(__dirname, '../../dist/renderer')
+    },
+    hot: true,
+    port: 3000,
+    open: true
+  },
+}

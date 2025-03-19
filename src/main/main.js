@@ -11,10 +11,12 @@ function createWindow() {
       contextIsolation: true
     }
   })
-
-  process.env.NODE_ENV === 'development' 
-    ? mainWindow.loadURL('http://localhost:3000')
-    : mainWindow.loadFile('dist/renderer/index.html')
+  // 统一使用本地文件加载方式
+  const loadPath = process.env.NODE_ENV === 'development'
+    ? path.join(__dirname, '../../dist/renderer/index.html')
+    : 'dist/renderer/index.html';
+  
+  mainWindow.loadFile(loadPath);
 }
 
-app.whenReady().then(createWindow) 
+app.whenReady().then(createWindow)
